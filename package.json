@@ -1,0 +1,41 @@
+{
+  "name": "ideos",
+  "version": "1.0.0",
+  "description": "Record flashes of your ideas.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon -w . -w .env app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YosepRA/ideos.git"
+  },
+  "author": "Yosep Ryan Agusta <yosep.ryan.yra@gmail.com> (https://yosepra.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YosepRA/ideos/issues"
+  },
+  "homepage": "https://github.com/YosepRA/ideos#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^7.5.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "mongoose": "^5.13.15",
+    "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "passport-local-mongoose": "^7.1.2"
+  }
+}
