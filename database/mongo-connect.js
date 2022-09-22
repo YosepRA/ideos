@@ -18,6 +18,9 @@ function mongoConnect(mongoUrl) {
   dbConnection.once('open', () => {
     console.log('Successfully connected to database...');
   });
+  dbConnection.once('close', () => {
+    console.log('Database disconnected.');
+  });
 
   return dbConnection;
 }

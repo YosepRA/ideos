@@ -5,6 +5,7 @@ const { Schema, model } = mongoose;
 
 const userSchema = new Schema({
   email: String,
+  ideas: [{ type: Schema.Types.ObjectId, ref: 'Idea' }],
 });
 
 userSchema.plugin(passportLocalMongoose);

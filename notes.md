@@ -6,7 +6,7 @@ Reminders and ideas that come up during development process. Completed items wil
 
 ## Server
 
-- Item one. ✅
+- Write a better Readme.
 
 ---
 
