@@ -14,15 +14,47 @@ module.exports = {
     if (error) {
       return res.json({
         status: 'error',
-        message: 'Sign up failed.',
+        message: error.message,
       });
     }
 
     // Establish login session.
+    req.login(registeredUser, (loginError) => {
+      if (loginError) {
+        const errorMessage = `Server login error: ${loginError.message}`;
 
-    return res.json({
-      status: 'ok',
-      username: registeredUser.username,
+        console.error(errorMessage);
+
+        return res.status(500).send(errorMessage);
+      }
+
+      const { username } = registeredUser;
+      const userData = {
+        username,
+      };
+
+      return res.json({
+        status: 'ok',
+        user: userData,
+      });
     });
+
+    return undefined;
+  },
+  async signin(req, res) {
+    const { username } = req.user;
+    const userData = {
+      username,
+    };
+
+    res.json({ status: 'ok', user: userData });
+  },
+  signout(req, res) {
+    req.logout(() => {
+      res.json({ status: 'ok' });
+    });
+  },
+  protected(req, res) {
+    res.send('You have accessed the protected route.');
   },
 };

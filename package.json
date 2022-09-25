@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon -w . -w .env app.js"
+    "dev": "nodemon -w . -w .env --ignore ui/ app.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "mongoose": "^5.13.15",
+    "mongoose-paginate-v2": "^1.7.1",
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
     "passport-local-mongoose": "^7.1.2"

@@ -7,6 +7,7 @@ const logger = require('morgan');
 const mongoConnect = require('./database/mongo-connect.js');
 const passport = require('./passport/index.js');
 const indexRouter = require('./routes/index.js');
+const ideaRouter = require('./routes/idea.js');
 const userRouter = require('./routes/user.js');
 
 const app = express();
@@ -42,13 +43,16 @@ app.use(session(sessionConfig));
 
 /* ======================= Passport ======================= */
 
-passport.initialize();
-passport.session();
+app.use(passport.initialize());
+app.use(passport.session());
 
 /* ======================= Routes ======================= */
 
 app.use('/api', indexRouter);
+app.use('/api/idea', ideaRouter);
 app.use('/api/user', userRouter);
+
+/* ======================= Listen ======================= */
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port} ...`);
