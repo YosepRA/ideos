@@ -35,4 +35,14 @@ function cls(input) {
     .trim();
 }
 
-export { generateIdea, cls };
+async function promiseResolver(promise) {
+  try {
+    const data = await promise;
+
+    return [data, null];
+  } catch (error) {
+    return [null, error];
+  }
+}
+
+export { generateIdea, cls, promiseResolver };

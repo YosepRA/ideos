@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const logger = require('morgan');
+const cors = require('cors');
 
 const mongoConnect = require('./database/mongo-connect.js');
 const passport = require('./passport/index.js');
@@ -31,6 +32,11 @@ const sessionConfig = {
   resave: false,
 };
 
+const corsConfig = {
+  origin: 'http://localhost:8000',
+  credentials: true,
+};
+
 /* ======================= MongoDB Connection ======================= */
 
 mongoConnect(mongoUrl);
@@ -40,6 +46,7 @@ mongoConnect(mongoUrl);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(session(sessionConfig));
+app.use(cors(corsConfig));
 
 /* ======================= Passport ======================= */
 

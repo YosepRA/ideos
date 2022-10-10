@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 
 import Button from './Button.jsx';
+import AuthContext from './context/AuthContext.jsx';
 
 const MainNavigation = function MainNavigationComponent() {
   const [open, setOpen] = useState(false);
+  const { authenticated, signout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const menuClasses = cn(
     'main-nav__menu absolute top-0 left-0 flex flex-col gap-2 w-screen h-full p-8 bg-primary-200 text-black text-lg transition-all translate-x-full',
@@ -18,10 +21,18 @@ const MainNavigation = function MainNavigationComponent() {
       setOpen(false);
     }
   };
+
   const handleMenuOpen = () => {
     setOpen(true);
   };
+
   const handleMenuClose = () => setOpen(false);
+
+  const handleSignOut = async () => {
+    await signout();
+    setOpen(false);
+    navigate('/');
+  };
 
   return (
     <nav className="main-nav w-full bg-primary-400 mb-5 px-2 py-2 text-white">
@@ -44,15 +55,32 @@ const MainNavigation = function MainNavigationComponent() {
           <Link to="/" className="uppercase">
             Home
           </Link>
-          <Link to="/signin" className="uppercase">
-            Sign In
-          </Link>
-          <Link to="/signup" className="uppercase">
-            Sign Up
-          </Link>
-          <Link to="/dashboard" className="uppercase">
-            Dashboard
-          </Link>
+
+          {authenticated ? (
+            <>
+              <Link to="/dashboard" className="uppercase">
+                Dashboard
+              </Link>
+
+              <button
+                type="button"
+                className="uppercase text-left"
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/signin" className="uppercase">
+                Sign In
+              </Link>
+
+              <Link to="/signup" className="uppercase">
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
 
         <Button variant="outline" onClick={handleMenuOpen}>
